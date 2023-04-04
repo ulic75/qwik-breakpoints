@@ -1,4 +1,4 @@
-# Qwik Breakpoint Signal
+# Qwik Breakpoints
 
 This package provides utilities to build responsive UIs that react to screen-size changes.
 
