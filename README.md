@@ -1,47 +1,98 @@
-# Qwik Library ⚡️
+# Qwik Breakpoint Signal
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik on GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
-- [Partytown](https://partytown.builder.io/)
-- [Mitosis](https://github.com/BuilderIO/mitosis)
-- [Builder.io](https://www.builder.io/)
+This package provides utilities to build responsive UIs that react to screen-size changes.
 
----
+## useBreakpointSignal
 
-## Project Structure
+A layout **breakpoint** is a viewport size threshold at which a layout shift can occur. The viewport size ranges between breakpoints corresponde to different standard screen sizes.
 
-Inside your project, you'll see the following directories and files:
+`useBreakpointSignal` lets you evaluate media queries to determine the current screen size and react to changes when the viewport size crosses a breakpoint.
 
+```ts
+import { component$, useComputed$ } from '@builder.io/qwik';
+import { Breakpoints, useBreakpointSignal } from 'qwik-breakpointsignal';
+
+export default component$(() => {
+  const bpSignal = useBreakpointSignal([
+    Breakpoints.XSmall,
+    Breakpoints.Small,
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge,
+  ]);
+
+  const currentScreenSize = useComputed$(() => {
+    const displayNameMap = new Map([
+      [Breakpoints.XSmall, 'XSmall'],
+      [Breakpoints.Small, 'Small'],
+      [Breakpoints.Medium, 'Medium'],
+      [Breakpoints.Large, 'Large'],
+      [Breakpoints.XLarge, 'XLarge'],
+    ]);
+    for (const query of Object.keys(bpSignal.value.breakpoints)) {
+      if (bpSignal.value.breakpoints[query]) {
+        return displayNameMap.get(query) ?? 'Unknown';
+      }
+    }
+  });
+
+  return (
+    <>
+      <p>Resize your browser window to see the current screen size change.</p>
+      <p>
+        The current screen size is <strong>{currentScreenSize.value}</strong>
+      </p>
+    </>
+  );
+});
 ```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── index.ts
+
+### React to changes to the viewport
+
+```ts
+const layoutChanges = usebreakpointSignal([
+  '(orientation: portrait)',
+  '(orientation: landscape)',
+]);
+
+useVisibleTask$(({ track }) => {
+  track(() => layoutChanges.value);
+  updateMyLayoutForOrientationChange();
+}
 ```
 
-- `src/components`: Recommended directory for components.
+### Predefined breakpoints
 
-- `index.ts`: The entry point of your component library, make sure all the public components are exported from this file.
+The built-in `Breakpoints` constant offers the following predefinded breakpoints for convenience, [originally drawn from the Material Design specification](https://material.io/archive/guidelines/layout/responsive-ui.html).
 
-## Development
+| Breakpoint name  | Media query                                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| XSmall           | (max-width: 599.98px)                                                                                                                                |
+| Small            | (min-width: 600px) and (max-width: 959.98px)                                                                                                         |
+| Medium           | (min-width: 960px) and (max-width: 1279.98px)                                                                                                        |
+| Large            | (min-width: 1280px) and (max-width: 1919.98px)                                                                                                       |
+| XLarge           | (min-width: 1920px)                                                                                                                                  |
+| Handset          | (max-width: 599.98px) and (orientation: portrait), (max-width: 959.98px) and (orientation: landscape)                                                |
+| Tablet           | (min-width: 600px) and (max-width: 839.98px) and (orientation: portrait), (min-width: 960px) and (max-width: 1279.98px) and (orientation: landscape) |
+| Web              | (min-width: 840px) and (orientation: portrait), (min-width: 1280px) and (orientation: landscape)                                                     |
+| HandsetPortrait  | (max-width: 599.98px) and (orientation: portrait)                                                                                                    |
+| TabletPortrait   | (min-width: 600px) and (max-width: 839.98px) and (orientation: portrait)                                                                             |
+| WebPortrait      | (min-width: 840px) and (orientation: portrait)                                                                                                       |
+| HandsetLandscape | (max-width: 959.98px) and (orientation: landscape)                                                                                                   |
+| TabletLandscape  | (min-width: 960px) and (max-width: 1279.98px) and (orientation: landscape)                                                                           |
+| WebLandscape     | (min-width: 1280px) and (orientation: landscape)                                                                                                     |
 
-Development mode uses [Vite's development server](https://vitejs.dev/). For Qwik during development, the `dev` command will also server-side render (SSR) the output. The client-side development modules are loaded by the browser.
+You can use these predefined breakpoints with useBreakpointSignal.
 
-```
-pnpm dev
-```
+```tsx
+const result = useBreakpointSignal([
+  Breakpoints.HandsetLandscape,
+  Breakpoints.HandsetPortrait
+]);
 
-> Note: during dev mode, Vite will request many JS files, which does not represent a Qwik production build.
-
-## Production
-
-The production build should generate the production build of your component library in (./lib) and the typescript type definitions in (./lib-types).
-
-```
-pnpm build
+return {
+  result.value.matches
+  ? <div>Handset</div>
+  : <div>Not Handset</div>
+}
 ```

@@ -1,7 +1,17 @@
 {
-  "name": "my-qwik-library-name",
+  "name": "qwik-breakpoints",
   "version": "0.0.1",
-  "description": "Create a reusable Qwik component library",
+  "description": "Qwik Breakpoints lets you evaluate media queries to determine the current screen size and react to changes when the viewport size crosses a breakpoint.",
+  "keywords": [
+    "qwik",
+    "breakpoint",
+    "layout"
+  ],
+  "homepage": "https://github.com/ulic75/qwik-breakpoints",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ulic75/qwik-breakpoints.git"
+  },
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/index.d.ts",
@@ -41,6 +51,7 @@
     "@typescript-eslint/eslint-plugin": "5.56.0",
     "@typescript-eslint/parser": "5.56.0",
     "eslint": "8.36.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-qwik": "latest",
     "np": "7.6.1",
     "prettier": "2.8.7",

@@ -9,6 +9,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:qwik/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -36,5 +38,9 @@ module.exports = {
     'no-case-declarations': 'off',
     'no-console': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
+    curly: 'error',
+    'no-new-func': 'error',
+    'import/no-relative-parent-imports': 'error',
+    'import/order': 'warn',
   },
 };

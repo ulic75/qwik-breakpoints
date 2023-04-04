@@ -1,6 +1,7 @@
 **/*.log
 **/.DS_Store
 *.
+.eslintrc.cjs
 .vscode/settings.json
 .history
 .yarn
