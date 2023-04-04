@@ -30,7 +30,6 @@ export const useBreakpointSignal = (
   const internalState = useSignal<InternalBreakpoints>({});
 
   const handler = $((e: MediaQueryListEvent) => {
-    console.log(new Date().getTime(), 'handled', e.media);
     internalState.value = { ...internalState.value, [e.media]: e.matches };
   });
 
