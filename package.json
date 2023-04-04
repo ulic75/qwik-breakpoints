@@ -1,6 +1,6 @@
 {
   "name": "qwik-breakpoints",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Qwik Breakpoints lets you evaluate media queries to determine the current screen size and react to changes when the viewport size crosses a breakpoint.",
   "keywords": [
     "qwik",
