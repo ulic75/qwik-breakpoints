@@ -10,7 +10,7 @@ A layout **breakpoint** is a viewport size threshold at which a layout shift can
 
 ```tsx
 import { component$, useComputed$ } from '@builder.io/qwik';
-import { Breakpoints, useBreakpointSignal } from 'qwik-breakpointsignal';
+import { Breakpoints, useBreakpointSignal } from 'qwik-breakpoints';
 
 export default component$(() => {
   const bpSignal = useBreakpointSignal([
@@ -50,7 +50,7 @@ export default component$(() => {
 ### React to changes to the viewport
 
 ```ts
-const layoutChanges = usebreakpointSignal([
+const layoutChanges = useBreakpointSignal([
   '(orientation: portrait)',
   '(orientation: landscape)',
 ]);
