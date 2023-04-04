@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/ulic75/qwik-breakpoints/compare/v1.0.0...v1.0.1) (2023-04-04)
+
+
+### Miscellaneous Chores
+
+* release 1.0.1 ([1819809](https://github.com/ulic75/qwik-breakpoints/commit/1819809e22c3a038317d84d8360fa0a37eb3c380))
+
 ## 1.0.0 (2023-04-04)
 
 
