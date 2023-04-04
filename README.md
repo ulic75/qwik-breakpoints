@@ -8,7 +8,7 @@ A layout **breakpoint** is a viewport size threshold at which a layout shift can
 
 `useBreakpointSignal` lets you evaluate media queries to determine the current screen size and react to changes when the viewport size crosses a breakpoint.
 
-```ts
+```tsx
 import { component$, useComputed$ } from '@builder.io/qwik';
 import { Breakpoints, useBreakpointSignal } from 'qwik-breakpointsignal';
 
